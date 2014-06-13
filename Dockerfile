@@ -11,15 +11,22 @@ MAINTAINER el aras<openmason@gmail.com>
 ENV HOME /root
 
 # Core updates
-RUN apt-get update 
-RUN apt-get install -y build-essential
+RUN 
+  apt-get update; \
+  apt-get install -y build-essential git; \
+  apt-get clean
 
 # Python related deps
-RUN apt-get install -y python-software-properties python
-RUN apt-get install -y python-pip
+RUN
+  apt-get update; \
+  apt-get install -y python-software-properties python python-pip; \
+  apt-get clean
 
-# Deployment/monitoring related deps
-RUN apt-get install -y git
-RUN apt-get install -y sysstat lsof strace tcpdump
+# Useful tools / system utilities
+RUN 
+  apt-get update; \
+  apt-get install -y wget sysstat lsof strace tcpdump; \
+  apt-get clean
+
 
 
