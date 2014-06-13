@@ -11,22 +11,20 @@ MAINTAINER el aras<openmason@gmail.com>
 ENV HOME /root
 
 # Core updates
-RUN 
+RUN \
   apt-get update; \
-  apt-get install -y build-essential git; \
+  apt-get install -yq build-essential git --no-install-recommends; \
   apt-get clean
 
 # Python related deps
-RUN
+RUN \
   apt-get update; \
-  apt-get install -y python-software-properties python python-pip; \
+  apt-get install -yq python-software-properties python python-pip --no-install-recommends; \
   apt-get clean
 
 # Useful tools / system utilities
-RUN 
+RUN \
   apt-get update; \
-  apt-get install -y wget sysstat lsof strace tcpdump; \
+  apt-get install -yq wget sysstat lsof strace tcpdump --no-install-recommends; \
   apt-get clean
-
-
 
