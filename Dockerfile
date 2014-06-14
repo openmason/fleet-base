@@ -1,7 +1,7 @@
 # Base image description
 #
 # Usage:
-# docker build -t openmason/fleet-base
+# docker build -t openmason/fleet-base .
 #
 #
 FROM ubuntu:14.04
@@ -19,7 +19,7 @@ RUN \
 # Python related deps
 RUN \
   apt-get update; \
-  apt-get install -yq python-software-properties python python-pip --no-install-recommends; \
+  apt-get install -yq python-software-properties python python-dev python-pip python-virtualenv --no-install-recommends; \
   apt-get clean
 
 # Useful tools / system utilities
