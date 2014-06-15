@@ -7,8 +7,13 @@
 FROM ubuntu:14.04
 MAINTAINER el aras<openmason@gmail.com>
 
+# Set locale
+RUN locale-gen --no-purge en_US.UTF-8
+
 # env variables 
 ENV HOME /root
+ENV LC_ALL en_US.UTF-8
+ENV DEBIAN_FRONTEND noninteractive
 
 # Core updates
 RUN \
