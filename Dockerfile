@@ -33,5 +33,6 @@ RUN \
   apt-get install -yq openssh-server ssh-import-id --no-install-recommends; \
   pip install --upgrade supervisor --pre; \
   mkdir /var/run/sshd; \
+  mkdir /var/log/supervisor; \
   apt-get clean
 
