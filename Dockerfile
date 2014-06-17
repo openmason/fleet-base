@@ -18,25 +18,20 @@ ENV DEBIAN_FRONTEND noninteractive
 # Core updates
 RUN \
   apt-get update; \
-  apt-get install -yq \
-    build-essential git \
-    software-properties-common \
-    --no-install-recommends; \
+  apt-get install -yq  build-essential git  software-properties-common  --no-install-recommends; \
   apt-get clean
 
 # Any ppa repositories go here
 
-# Python related deps
-RUN \
-  apt-get update; \
-  apt-get install -yq \
-    python python-dev python-pip python-virtualenv \
-    --no-install-recommends; \
-  apt-get clean
 
-# Useful tools / system utilities
+# Python, Nodejs, Useful tools / system utilities
 RUN \
   apt-get update; \
+  apt-get install -yq python python-dev python-pip python-virtualenv --no-install-recommends; \
+  apt-get install -yq nodejs npm --no-install-recommends; \
   apt-get install -yq wget sysstat lsof strace tcpdump --no-install-recommends; \
+  apt-get install -yq openssh-server ssh-import-id --no-install-recommends; \
+  pip install --upgrade supervisor --pre; \
+  mkdir /var/run/sshd; \
   apt-get clean
 
