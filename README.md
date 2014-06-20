@@ -3,7 +3,7 @@ Highly opinionated base image. Bundles build-essential (all that required to do 
 
 # Languages
  * Python
- * nodejs
+ * Nodejs
 
 # Utilties
 Please refer to the Dockerfile for full list of admin utilities packed in.

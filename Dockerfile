@@ -27,8 +27,8 @@ RUN \
 # Python, Nodejs, Useful tools / system utilities
 RUN \
   apt-get update; \
-  apt-get install -yq python python-dev python-pip python-virtualenv --no-install-recommends; \
-  apt-get install -yq nodejs npm --no-install-recommends; \
+  apt-get install -yq python python-dev python-pip --no-install-recommends; \
+  apt-get install -yq nodejs nodejs-legacy npm --no-install-recommends; \
   apt-get install -yq wget sysstat lsof strace tcpdump --no-install-recommends; \
   apt-get install -yq openssh-server ssh-import-id --no-install-recommends; \
   pip install --upgrade supervisor --pre; \
