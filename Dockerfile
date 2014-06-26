@@ -23,22 +23,25 @@ RUN \
 
 # Any ppa repositories go here
 
-
 # Python, Nodejs, Useful tools / system utilities
 RUN \
   apt-get install -yq python python-dev python-pip --no-install-recommends; \
   apt-get install -yq nodejs nodejs-legacy npm --no-install-recommends; \
-  apt-get install -yq openssh-server ssh-import-id --no-install-recommends; \
-  ssh-import-id gh:$DEPLOY_USER; 
+  apt-get install -yq openssh-server ssh-import-id --no-install-recommends;
 
 RUN \
   apt-get install -yq wget sysstat lsof strace tcpdump --no-install-recommends; \
   pip install --upgrade circus; \
-  npm install -g chevron; \
+  npm install -g chevron; 
+
+RUN \
+  ssh-import-id gh:$DEPLOY_USER; \
+  sed -i '/ENABLED/ s/false/true/' /etc/default/sysstat; \
   mkdir -p /var/run/sshd /var/log/circus;
 
 # Everything is controled via mozilla circus supervisor
 ADD circus/circusd.conf  /etc/circusd.conf
+ADD logrotate/circus     /etc/logrotate.d/circus
 
 # Set the default command to execute
 # when creating a new container

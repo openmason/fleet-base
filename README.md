@@ -18,6 +18,7 @@ Please refer to the Dockerfile for full list of admin utilities packed in.
  * ssh
  * syslog
  * logrotate
+ * sar (enabled)
  * circus (mozilla circus process manager)
 
 # To include within your Dockerfile
