@@ -30,14 +30,26 @@ RUN \
   apt-get install -yq openssh-server ssh-import-id --no-install-recommends;
 
 RUN \
-  apt-get install -yq wget sysstat lsof strace tcpdump --no-install-recommends; \
+  apt-get install -yq wget curl unzip sysstat lsof strace tcpdump dnsutils --no-install-recommends; \
   pip install --upgrade circus; \
   npm install -g chevron; 
 
 RUN \
+  cd /tmp; \
+    wget https://dl.bintray.com/mitchellh/consul/0.3.0_linux_amd64.zip -O consul.zip; \
+    unzip consul.zip; \
+    chmod +x consul; \
+    mv consul /usr/local/bin; \
+    wget -O /usr/local/bin/confd https://github.com/kelseyhightower/confd/releases/download/v0.6.0-alpha1/confd-0.6.0-alpha1-linux-amd64; \
+    chmod +x /usr/local/bin/confd; 
+
+RUN \
   ssh-import-id gh:$DEPLOY_USER; \
   sed -i '/ENABLED/ s/false/true/' /etc/default/sysstat; \
-  mkdir -p /var/run/sshd /var/log/circus;
+  mkdir -p /etc/consul.d /var/run/sshd /var/log/circus;
+
+RUN \
+  echo 'root:nosamnepo' | chpasswd
 
 # Everything is controled via mozilla circus supervisor
 ADD circus/circusd.conf  /etc/circusd.conf
