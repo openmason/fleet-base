@@ -48,20 +48,19 @@ RUN \
   sed -i '/ENABLED/ s/false/true/' /etc/default/sysstat; \
   mkdir -p /etc/consul.d /var/run/sshd /var/log/circus;
 
-RUN \
-  echo 'root:nosamnepo' | chpasswd
-
 # Everything is controled via mozilla circus supervisor
 ADD circus/circusd.conf  /etc/circusd.conf
 ADD logrotate/circus     /etc/logrotate.d/circus
-
-# Set the default command to execute
-# when creating a new container
-CMD ["/usr/local/bin/circusd", "/etc/circusd.conf"]
 
 # All cleanups
 RUN apt-get clean; \
   rm -rf /tmp/* /var/tmp/* /var/lib/apt/lists/* 
 
+RUN echo 'root:nosamnepo' | chpasswd
+
 # Expose ports
 EXPOSE 22
+
+# Set the default command to execute
+# when creating a new container
+CMD ["/usr/local/bin/circusd", "/etc/circusd.conf"]
