@@ -46,6 +46,7 @@ RUN \
 RUN \
   ssh-import-id gh:$DEPLOY_USER; \
   sed -i '/ENABLED/ s/false/true/' /etc/default/sysstat; \
+  sed -i '/PermitRootLogin/ s/without-password/yes/' /etc/ssh/sshd_config; \
   mkdir -p /etc/consul.d /var/run/sshd /var/log/circus;
 
 # Everything is controled via mozilla circus supervisor
