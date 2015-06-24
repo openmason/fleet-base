@@ -14,7 +14,7 @@ RUN locale-gen --no-purge en_US.UTF-8
 ENV HOME /root
 ENV LC_ALL en_US.UTF-8
 ENV DEBIAN_FRONTEND noninteractive
-ENV DEPLOY_USER openmason
+#ENV DEPLOY_USER openmason
 
 # Core updates
 RUN \
@@ -25,7 +25,7 @@ RUN \
 
 # Python, Useful tools / system utilities
 RUN \
-  apt-get install -yq python python-dev python-pip --no-install-recommends; \
+  apt-get install -yq python python-dev python-setuptools python-pip --no-install-recommends; \
   apt-get install -yq openssh-server \
       wget curl unzip sysstat lsof strace tcpdump dnsutils \
       --no-install-recommends; 
@@ -37,8 +37,8 @@ RUN \
 
 RUN \
   easy_install -U pip; \
-  pip install --upgrade circus; \
-  npm install -g chevron; 
+  pip install --upgrade circus; 
+#  npm install -g chevron; 
 
 # clustering base
 #RUN \
